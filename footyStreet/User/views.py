@@ -49,22 +49,22 @@ def login(request):
 
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('folders:subject_folder_default'))#Pagina principal
+            return #Pagina principal
         else:
             context = {
                 'form': UserForm(None),
                 'errors': True
             }
-            return render(request, template_name="Users/iniciarSesion.html", context = context)#Login form tiene errores
+            return render(request, template_name="User/login.html", context = context)#Login form tiene errores
     else:
         if not request.user.is_authenticated:
             context = {
                 'form': UserForm(None),
                 'error': False
             }
-            return render(request, template_name="Users/iniciarSesion.html", context = context)#Login por primera vez
+            return render(request, template_name="User/login.html", context = context)#Login por primera vez
         else:
-            return redirect(reverse('folders:subject_folder_default'))
+            return #Pagina principal
 
 def logout(request):
     if request.method == "POST":
@@ -74,19 +74,19 @@ def logout(request):
 
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('folders:subject_folder_default'))#Pagina principal
+            return #Pagina principal
         else:
             context = {
                 'form': UserForm(None),
                 'errors': True
             }
-            return render(request, template_name="Users/iniciarSesion.html", context = context)#Login form tiene errores
+            return render(request, template_name="User/login.html", context = context)#Login form tiene errores
     else:
         if not request.user.is_authenticated:
             context = {
                 'form': UserForm(None),
                 'error': False
             }
-            return render(request, template_name="Users/iniciarSesion.html", context = context)#Login por primera vez
+            return render(request, template_name="User/login.html", context = context)#Login por primera vez
         else:
-            return redirect(reverse('folders:subject_folder_default'))
+            return #Pagina principal
