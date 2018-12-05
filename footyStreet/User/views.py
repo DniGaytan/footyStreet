@@ -3,7 +3,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.urls import reverse
 from .forms import UserForm
 
-def register(request):
+def registerUser(request):
     form = UserForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
@@ -41,11 +41,11 @@ def register(request):
         else:
             return #Pagina de inicio
 
-def login(request):
+def loginUser(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None and user.is_active:
             login(request, user)
@@ -66,7 +66,7 @@ def login(request):
         else:
             return #Pagina principal
 
-def logout(request):
+def logoutUser(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']

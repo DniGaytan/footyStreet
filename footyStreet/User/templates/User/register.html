@@ -21,9 +21,14 @@
               {% for key, value in errors.items %}
                 {% if key == formField.name %}
                   {% if key == 'password' %}
-                    <p style="color:red;">{{value.0}}</p>
+                    <div class="alert alert-warning" role="alert" style="margin-top:5px;">
+                       <p style="color:red;">{{value.0}}</p>
+                    </div>
+
                   {% else %}
-                    <p style="color:red;">{{value.1}}</p>
+                    <div class="alert alert-warning" role="alert" style="margin-top:5px;">
+                       <p style="color:red;">{{value.1}}</p>
+                    </div>
                   {% endif%}
                 {% endif %}
              {% endfor %}

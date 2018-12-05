@@ -1,7 +1,7 @@
 {% extends 'User/generic.html' %}
 {% load staticfiles %}
 
-{% block title%}Registro{% endblock %}
+{% block title%}Iniciar sesión{% endblock %}
 
 {% block stylesheetContent%}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
@@ -13,22 +13,19 @@
 
     <div class="row justify-content-center login-form">
         <div class="col-lg-5 col-md-5 col-sm-10">
-          <form class="form-signin" action="{% url 'user:registerPath' %}" method='post'>
-
+          <form class="form-signin" action="{% url 'user:loginPath' %}" method='POST'>
               {% csrf_token %}
               {% for formField in form %}
-                <label for='{{formField.id_of_label}}' style="color:white;">{{formField.label}}:</label>
-                  {{formField}}
-                  {% for key, value in errors.items %}
-                    {% if key == formField.name %}
-                      {% if key == 'password' %}
-                        <p style="color:red;">{{value.0}}</p>
-                      {% else %}
-                        <p style="color:red;">{{value.1}}</p>
-                      {% endif%}
-                    {% endif %}
-                 {% endfor %}
-              {% endfor %}
+                {% if formField.name != 'email' %}
+                    <label for='{{formField.id_of_label}}' style="color:white;">{{formField.label}}:</label>
+                    {{formField}}
+                {% endif %}
+             {% endfor %}
+             {% if errors %}
+             <div class="alert alert-warning" role="alert" style="margin-top:5px;">
+                El usuario y/o contraseña son incorrectos
+             </div>
+             {% endif %}
               <div class="text-center">
                 <button type="submit" class="btn btn-primary" style='margin: 1rem 0;'>Iniciar sesión</button>
               </div>
